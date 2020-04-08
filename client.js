@@ -33,66 +33,48 @@ const employees = [
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
 
-// Take small steps! Don't write a for loop and two functions that do all of the calculations right away.
-// This problem is massive! Break the problem down. Use the debugger.
-// What is the fewest lines of code I can write and test to get just a little closer?
-
-// This is not a race. Everyone on your team should understand what is happening.
-// Ask questions when you don't.
-
 console.log(employees);
 
-function employeeBonus(person) {
+function bonusCal(employee) {
+  //creating new object 
   let newObject = {
-    name: person.name,
-    bonusPercentage: 5,
-    totalCompensation: (person.annualSalary),
-    totalBonus: 1,
-  };
- 
-}
-console.log(employees[4].name);
-
-
-let array = [];
-
-function bonusCalculator() {
-  let bonPercentage;
-  for (let employee of employees) {
-    console.log(employee)  
-    if (employee.reviewRating < 3) {
-      bonPercentage = 0;
-      console.log('Bonus:', bonPercentage);
-      array.push({bonusPercentage: bonPercentage});
-    } else if (employee.reviewRating === 3) {
-      bonPercentage = 0.04;
-      console.log('Bonus:', bonPercentage);
-    } else if (employee.reviewRating === 4) {
-      bonPercentage = 0.06;
-      console.log('Bonus:', bonPercentage);
-    } else if (employee.reviewRating === 5) {
-      bonPercentage = 0.1;
-      console.log('Bonus:', bonPercentage);
-    }
-    if (employee.employeeNumber < 10000) {
-      bonPercentage += 0.05;
-      console.log('Bonus plus tenure:',bonPercentage);
-    } 
-    if (employee.annualSalary > 65000) {
-      bonPercentage -= 0.01;
-      console.log('Bonus after reduction:',bonPercentage);
-    } 
-    if (bonPercentage > 0.13) {
-        bonPercentage = 0.13;
-        console.log('Final Bonus:', bonPercentage);
-    } else if (bonPercentage < 0) {
-       bonPercentusage = 0;
-       console.log('Final Bonus:', bonPercentage);
-    }
+    name: employee.name,
+    bonusPercentage: 0,
+    totalCompensation: 0,
+    totalBonus: 0,
   }
-}
-bonusCalculator();
+  if (employee.reviewRating < 3) {
+    newObject.bonusPercentage = 0;
+  } else if (employee.reviewRating === 3) {
+    newObject.bonusPercentage = .04;
+  } else if (employee.reviewRating === 4) {
+    newObject.bonusPercentage = .06;
+  } else if (employee.reviewRating === 5) {
+    newObject.bonusPercentage = .10
+  }
+  if (employee.employeeNumber.length === 4) {
+    newObject.bonusPercentage += .05
+  }
+  if (employee.annualSalary > 65000) {
+    newObject.bonusPercentage -= 0.01;
+  }
+  if (newObject.bonusPercentage > 0.13) {
+    newObject.bonusPercentage = 0.13;
+  } else if (newObject.bonusPercentage < 0) {
+    newObject.bonusPercentusage = 0;
+  }
+  //totalBonus calculation
+  newObject.totalBonus = Math.round((employee.annualSalary) * newObject.bonusPercentage);
+  //totalCompensation calculation
+  newObject.totalCompensation = Number(employee.annualSalary) + newObject.totalBonus;
 
+  console.log(newObject);
+}
+
+//looping through the employees array. Also giving bonus cal access to the loop
+for (let i = 0; i < employees.length; i++) {
+    bonusCal(employees[i])
+  }
 
 
 
